@@ -1,69 +1,170 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="./const.js"></script>
 <title>lots</title>
 <style type="text/css">
 html, body{
-padding:0px; margin:0px; font-size:12px;
+padding:0px; margin:0px; font-size:16px;
+font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
-body{
-margin:50px;
+.bodystyle{
+  /* filter:alpha(opacity=50);   */
+  /* -moz-opacity:0.5;
+  -khtml-opacity: 0.5; */
+  /* opacity: 0.5; */
+  width:100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('./img/enter_top_cr.jpg') top/100% no-repeat;
+  z-index: 0;
 }
-#result{
-height:20px; margin-bottom:10px;
+.bodymask {
+  width:100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0.5);
 }
-#result div{
-float:left; border:1px solid #006699; color:#c00; width:64px; height:20px; line-height:20px;
-margin-right:15px; text-align:center;
+.yun {
+  position: absolute;
+  bottom: 0;
+  left: 32%;
+  filter: blur(9px);
+  user-select: none;
 }
-#control div{
-float:left; width:64px; height:20px; line-height:20px; border:1px solid #008800; color:#c00;
-margin-right:20px; text-align:center;
+ h1 {
+   position: absolute;
+   text-align: center;
+   margin-top: 90px;
+   left: 25.5%;
+   font-size: 45px;
+   opacity: 1;
+   color: #fff;
+   z-index: 2;
+ }
+.controlWrap {
+  width: 1200px;
+  height: 300px;
+  position: absolute;
+  left: 14%;
+  top: 180px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.controlWrap > div{
+width:150px;
+height:40px;
+line-height:40px;
+border: 5px solid rgb(0, 91, 175);
+border-radius: 4px;
+color:rgb(0, 91, 175);
+font-weight: 900;
+font-size: 21px;
+margin-right:20px;
+text-align:center;
+}
+button {
+  position: absolute;
+  color: rgb(0, 132, 255);
+  border: 1px solid rgb(0, 132, 255);
+  padding: 6px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 124px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 40%;
+  margin-left: 45%;
+}
+button:hover {
+  color: #fff;
+  border: 1px solid #90caf9;
+  background-color: rgba(144, 202, 249);
 }
 </style>
-<script type="text/javascript">
-var arrData = [], timerID = 0;
-for(var i = 1; i <=300; i++){
-arrData[i - 1] = i;
-}
-function $(id){
-return document.getElementById(id);
-}
-function Start(btn){
-if(timerID > 0){
-clearInterval(timerID);
-timerID = 0;
-}
-if(arrData.length < 1){
-alert("没有数据了!");
-return;
-}
-if(btn.value == "开始"){
-timerID = setInterval(function(){
-$("num").index = parseInt(Math.random() * (arrData.length));
-$("num").innerHTML = arrData[$("num").index];
-}, 30);
-btn.value = "暂停";
-}else{
-var div = document.createElement("div");
-div.innerHTML = $("num").innerHTML;
-$("result").appendChild(div);
-arrData.splice($("num").index, 1);
-btn.value = "开始";
-}
-}
-window.onload = function(){
-$("btnStart").focus();
-};
-</script>
 </head>
 <body>
-<div id="result"></div><div style="clear:both; float:none"></div>
-<div id="control">
-<div id="num">0</div>
-<input type="button" id="btnStart" value="开始" onclick="Start(this)" />
+<div class="bodystyle">
 </div>
+<div class="yun">
+    <img src="./img/WeWork Helper20191104142355.png">
+</div>
+<div class="bodymask"></div>
+<h1>2019年福州空中乘务部岗位大练兵</h1>
+<div class="controlWrap">
+    <div id="num1"></div>
+    <div id="num2"></div>
+    <div id="num3"></div>
+    <div id="num4"></div>
+    <div id="num5"></div>
+    <div id="num6"></div>
+    <div id="num7"></div>
+    <div id="num8"></div>
+    <div id="num9"></div>
+    <div id="num10"></div>
+    <div id="num11"></div>
+    <div id="num12"></div>
+</div>
+<button id="btnStart" onclick="Start(this)">抽签</button>
+<script type="text/javascript">
+  let i = 0;
+  var timerID1 = 0;
+  var timerID2 = 0;
+  var timerID3 = 0;
+  var timerID4 = 0;
+  var timerID5 = 0;
+  var timerID6 = 0;
+  let timerList = new Array(12).fill(0);
+  const list = peopleArray;
+  function $(id){
+  return document.getElementById(id);
+  }
+  function Start(btn){
+    if (i >= 12) {
+      return;
+    } 
+    clearInterval(timerList[i]);
+    timerList[i] = 0;
+  // for(let j = 0; j < 6; j++) {
+    if(list[0].length < 1){
+    alert(`没有数据了!`);
+    return;
+    }
+  // }
+  if(btn.innerHTML == "抽签"){
+    // for (let a = 0; a < 6; a++) {
+        timerList[i] = setInterval(function(){
+        $(`num${i + 1}`).index = Math.floor(Math.random() * (list[i].length));
+        $(`num${i + 1}`).innerHTML = list[i][$(`num${i + 1}`).index];
+        console.log(`num${i + 1}`);
+      }, 100);
+    // }
+    btn.innerHTML = "暂停";
+    } else {
+      list[i].splice($(`num${i + 1}`).index, 1);
+      btn.innerHTML = "抽签";
+      i++;
+      if (i>=12) {
+        btn.innerHTML = "已抽完";
+      }
+  }
+}
+  //   window.onload = function(){
+  //   // $("btnStart").focus();
+  // };
+  </script>
 </body>
 </html>
