@@ -53,9 +53,9 @@ font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   position: absolute;
   left: 14%;
   top: 180px;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 .controlWrap > div{
 width:150px;
@@ -68,6 +68,16 @@ font-weight: 900;
 font-size: 21px;
 margin-right:20px;
 text-align:center;
+display: inline-block;
+}
+.controlWrap > div:first-child{
+  width: 200px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 22px;
+  display: block;
+  margin-left: 27%;
+  margin-bottom: 40px;
 }
 button {
   position: absolute;
@@ -111,56 +121,27 @@ button:hover {
     <div id="num4"></div>
     <div id="num5"></div>
     <div id="num6"></div>
-    <div id="num7"></div>
-    <div id="num8"></div>
-    <div id="num9"></div>
-    <div id="num10"></div>
-    <div id="num11"></div>
-    <div id="num12"></div>
 </div>
 <button id="btnStart" onclick="Start(this)">抽签</button>
 <script type="text/javascript">
   let i = 0;
-  var timerID1 = 0;
-  var timerID2 = 0;
-  var timerID3 = 0;
-  var timerID4 = 0;
-  var timerID5 = 0;
-  var timerID6 = 0;
-  let timerList = new Array(12).fill(0);
   const list = peopleArray;
+  let numArray = [0,1,2,3,4,5,6,7,8,9,10,11];
   function $(id){
   return document.getElementById(id);
   }
   function Start(btn){
     if (i >= 12) {
+      alert('已抽完全部，要重抽请刷新')
       return;
-    } 
-    clearInterval(timerList[i]);
-    timerList[i] = 0;
-  // for(let j = 0; j < 6; j++) {
-    if(list[0].length < 1){
-    alert(`没有数据了!`);
-    return;
     }
-  // }
-  if(btn.innerHTML == "抽签"){
-    // for (let a = 0; a < 6; a++) {
-        timerList[i] = setInterval(function(){
-        $(`num${i + 1}`).index = Math.floor(Math.random() * (list[i].length));
-        $(`num${i + 1}`).innerHTML = list[i][$(`num${i + 1}`).index];
-        console.log(`num${i + 1}`);
-      }, 100);
-    // }
-    btn.innerHTML = "暂停";
-    } else {
-      list[i].splice($(`num${i + 1}`).index, 1);
-      btn.innerHTML = "抽签";
-      i++;
-      if (i>=12) {
-        btn.innerHTML = "已抽完";
+    let num = Math.floor(Math.random() * numArray.length);
+    for (let a = 0; a < 6; a++) {
+        // $(`num${a + 1}`).index = Math.floor(Math.random() * (list[i].length));
+        $(`num${a + 1}`).innerHTML = list[numArray[num]][a];
       }
-  }
+    numArray.splice(num, 1);
+    i++;
 }
   //   window.onload = function(){
   //   // $("btnStart").focus();
